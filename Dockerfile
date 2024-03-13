@@ -1,13 +1,19 @@
-FROM alpine:latest
+FROM python:3.9-slim
 
-# Install necessary packages
-RUN apk update && apk add --no-cache curl
+# Set the working directory inside the container
+WORKDIR /app
 
-# Copy the script into the container
-COPY hello.sh /usr/local/bin/hello.sh
+# Copy the requirements file
+COPY requirements.txt .
 
-# Make the script executable
-RUN chmod +x /usr/local/bin/hello.sh
+# Install Flask and other dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Set the script as the entry point
-ENTRYPOINT ["hello.sh"]
+# Copy the Flask app into the container
+COPY app.py .
+
+# Expose port 3080 to the outside world
+EXPOSE 3080
+
+# Run the Flask app
+CMD ["python", "app.py"]
