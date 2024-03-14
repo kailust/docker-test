@@ -6,9 +6,9 @@ docker build -t hello-world .
 ```
 To run the container:
 ```
-docker run -d -p 8080:8080 hello-world
+docker run -d -p 3080:3080 hello-world
 ```
 To test
 ```
-curl localhost:8080
+curl localhost:3080
 ```
